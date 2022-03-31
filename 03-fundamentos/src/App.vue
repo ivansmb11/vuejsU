@@ -1,15 +1,16 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Hola Mundo"/>
+  <CounterVue :start='5' title='Entraron'/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import CounterVue from "./components/CounterVue.vue"
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CounterVue
   }
 }
 </script>
