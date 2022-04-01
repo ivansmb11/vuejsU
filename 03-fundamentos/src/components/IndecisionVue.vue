@@ -10,7 +10,7 @@
             v-model="question">
         <p>Recuerda terminar con un signo de interrogación (?)</p>
      
-        <div>
+        <div v-if="isValidQuestion">
             <h2>{{ question }}</h2>
             <h1>{{ answer }}</h1>
         </div>
@@ -18,14 +18,15 @@
      
 </template>
      
-    <script>
+<script>
     export default {
+
         data() {
             return {
                 question: null,
                 answer: null,
-                img: null
-
+                img: null,
+                isValidQuestion: false
             }
         },
         methods: {
@@ -33,68 +34,75 @@
                 this.answer = 'Pensando...';
                 
                 const { answer, image } = await fetch('https://yesno.wtf/api').then( r => r.json() );
-                
-                this.answer = answer;
+                const ans = {
+                    'yes': 'Sí!',
+                    'no': 'No!'
+                }
+
+                this.answer = ans[answer];
                 this.img = image;
             }
         },
         watch: {
             question( value ) {
+
+                this.isValidQuestion = false
                 if ( !value.includes('?') ) return;
+                this.isValidQuestion = true;
 
-                this.getAnswer()
-
+                this.getAnswer();
             }
         }
         
     }
-    </script>
+</script>
      
-    <style scope="">
+<style scope="">
      
-        img, .bg-dark {
-            height: 100vh;
-            left: 0px;
-            max-height: 100%;
-            max-width: 100%;
-            position: fixed;
-            top: 0px;
-            width: 100vw;
-        }
+    img, .bg-dark {
+        height: 100vh;
+        left: 0px;
+        max-height: 100%;
+        max-width: 100%;
+        position: fixed;
+        top: 0px;
+        width: 100vw;
+    }
      
-        .bg-dark {
-            background-color: rgba(0, 0, 0, 0.4);
-        }
+    .bg-dark {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
      
-        .indecision-container {
-            position: relative;
-            z-index: 99;
-        }
+    .indecision-container {
+        position: relative;
+        z-index: 99;
+    }
         
-        input {
-            width: 250px;
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: none;
-            font-size: 25px;
-            margin-bottom: 30px;
-        }
-        input:focus {
-            outline: none;
-        }
+    input {
+        width: 250px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        font-size: 25px;
+        margin-bottom: 30px;
+    }
+    
+    input:focus {
+        outline: none;
+    }
      
-        p {
-            color: white;
-            font-size: 20px;
-            margin-top: 0px;
-        }
+    p {
+        color: white;
+        font-size: 20px;
+        margin-top: 0px;
+    }
      
-        h1, h2 {
-            color: white;
-        }
+    h1, h2 {
+        color: white;
+    }
         
-        h2 {
-            margin-top: 150px;
-        }
+    h2 {
+        margin-top: 150px;
+    }
      
-    </style>
+</style>

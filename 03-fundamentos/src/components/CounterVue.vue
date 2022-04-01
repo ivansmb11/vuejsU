@@ -9,7 +9,7 @@
 </template>
 
 <script>
-export default {
+  export default {
 
     props: {
       title: String,
@@ -46,25 +46,25 @@ export default {
         return this.title || 'Counter';
       }
     }
-}
+  }
 </script>
 
 <style>
 
-button {
-  background: #42b883;
-  border-radius: 5px;
-  border: 1px solid #fff;
-  color: #fff;
-  cursor: pointer;
-  margin: 0 5px;
-  padding: 5px 15px;
-  transition: 0.3s ease-in-out;
-}
+  button {
+    background: #42b883;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px 15px;
+    transition: 0.3s ease-in-out;
+  }
 
-button:hover {
-  background: #258158;
-  transition: 0.3s ease-in-out;
-}
+  button:hover {
+    background: #258158;
+    transition: 0.3s ease-in-out;
+  }
 
 </style>
